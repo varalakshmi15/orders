@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="my-3 text-center">
+            <%= select_tag :name, options_for_select(@items.collect{|item| [item.name, item.id]}, selected: @item_id), {class: "w-100 mb-3 js-example-basic-multiple items-select", multiple: "multiple", placeholder: "Please Select"} %>
+            <%= submit_tag 'Add Order', class: "btn btn-raised btn-primary rounded-50 my-3 order_submit" %>
+        </div>
+
+        <div class="list-items">
+            <% @orders.each do |order| %>
+                <div class="card my-2">
+                    <div class="card-header justify-content-between d-flex">
+                        <div class="">Order id: <%= order.id %> </div>
+                        <div class="pull-right">Created at: <%= order.created_at %>
+                            <%= link_to order_item_path(order), method: :delete, class:'f-12 text-danger' do %>
+                                <%= image_tag 'rubbish-bin.png', class: 'text-danger', width: '12', title: 'delete order', class: 'm-2' %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <% order.order_items.each do |order_item| %>
+                            <div class="d-flex justify-content-between">
+                                <div class="font-weight-bold text-capitalize"><%= order_item.item.name %></div>
+                                <div class="">₹ <%= order_item.item.price %> </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+    

@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :order_items
+  devise_for :users
+  root 'order_items#new'
+  resources :items
 end
